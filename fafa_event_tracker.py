@@ -155,4 +155,6 @@ def display_click_details(clickData, chart_mode):
     return f"{clicked_date} 癲癇詳細記錄", table_data.to_dict('records')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 8050))
+    app.run(host="0.0.0.0", port=port, debug=True)
