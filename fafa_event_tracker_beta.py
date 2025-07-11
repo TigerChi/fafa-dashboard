@@ -6,8 +6,12 @@ from dash import Dash, dcc, html, Input, Output, State
 from dash import dash_table
 import os
 
-# 讀取資料並加上是否睡眠中標記
-df = pd.read_csv("fafa_data.csv", parse_dates=["開始時間"])
+
+# 讀取資料，請確保是乾淨版本
+df = pd.read_csv("fafa_data.csv")
+
+# 明確轉換成 datetime，才能使用 .dt
+df['開始時間'] = pd.to_datetime(df['開始時間'], errors='coerce')
 df['時間（小時）'] = df['開始時間'].dt.hour + df['開始時間'].dt.minute / 60
 df['日期'] = df['開始時間'].dt.date
 
